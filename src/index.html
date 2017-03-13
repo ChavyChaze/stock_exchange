@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <title>MEAN Stack User Registration and Login Example Application</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://rawgithub.com/McNull/angular-block-ui/bower/angular-block-ui.min.css">
+        <link href="app-content/main.css" rel="stylesheet" />
+
+    </head>
+
+    <body class="container">
+
+        <!-- header -->
+        <header>
+            <ul class="nav nav-tabs">
+                <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
+                <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
+                <li><a href="/login" target="_self">Logout</a></li>
+            </ul>
+            <br>
+            <div class="flash-message" ng-if="flash">
+                <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+            </div>
+        </header>
+
+        <!-- main -->
+        <main ui-view></main>
+
+        <!-- footer -->
+        <footer></footer>
+
+        <!-- external scripts -->
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+        <script type="text/javascript" src="//rawgithub.com/McNull/angular-block-ui/bower/angular-block-ui.min.js"></script>
+
+
+        <!-- application scripts -->
+        <script src="app.js"></script>
+
+        <!-- services -->
+        <script src="app-services/user.service.js"></script>
+        <script src="app-services/flash.service.js"></script>
+        <script src="app-services/currency.service.js"></script>
+
+        <!-- controlers -->
+        <script src="app-views/home/home.controller.js"></script>
+        <script src="app-views/account/account.controller.js"></script>
+
+        <!-- components -->
+        <script src="app-components/buy-currency/buyCurrency.component.js"></script>
+        <script src="app-components/sell-currency/sellCurrency.component.js"></script>
+        <script src="app-components/buy-modal/buyModal.component.js"></script>
+        <script src="app-components/sell-modal/sellModal.component.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,27 @@
+<div>
+    <div class="modal-body">
+        <div>{{$ctrl.greeting}}</div>
+
+        <form method="post">
+            <div class="form-group">
+                <label for="count">How much units of {{$ctrl.modalData.code}} would you like to sell?</label>
+                <input type="number" id="count" class="form-control" ng-model="$ctrl.modalData.count" ng-change="$ctrl.updateCurrencyCount()" required />
+            </div>
+        </form>
+
+        <br>
+        <p>You will earn <strong>{{$ctrl.summary | number : 2}}</strong></p>
+
+        <button class="btn btn-warning" type="button" ng-click="$ctrl.close()">
+            Close Modal
+        </button>
+
+        <button class="btn btn-warning" type="button" ng-click="$ctrl.dismiss()">
+            Dimiss Modal
+        </button>
+
+        <button class="btn btn-danger" type="button" ng-click="$ctrl.sellCurrency()" ng-disabled="$ctrl.isDisabled">
+            Sell
+        </button>
+    </div>
+</div>

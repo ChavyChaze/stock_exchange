@@ -1,0 +1,62 @@
+﻿<%- include('partials/header') %>
+<div class="form-container">
+    <h2>Register</h2>
+    <% if(locals.error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    <form method="post">
+        <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" name="firstName" id="firstName" class="form-control" value="<%= locals.firstName || '' %>" required />
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" name="lastName" id="lastName" class="form-control" value="<%= locals.lastName || '' %>" required />
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" value="<%= locals.username || '' %>" required />
+        </div>
+        <div class="form-group">
+            <label for="currency">Major Currency <small> - please type a shortcut, ex: PLN, USD etc...</small></label>
+            <input type="text" name="currency" id="currency" class="form-control" value="<%= locals.currency || '' %>" required />
+        </div>
+        <div class="form-group">
+            <label for="value">Value</label>
+            <input type="number" name="value" id="value" class="form-control" value="<%= locals.value || 0 %>" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" required />
+        </div>
+
+        <h5>If you have other currencies, please provide their values below:</h5>
+
+         <div class="form-group">
+            <label for="usd">USD</label>
+            <input type="number" name="usd" id="usd" class="form-control" value="<%= locals.usd || 0 %>" />
+        </div> <div class="form-group">
+            <label for="eur">EUR</label>
+            <input type="number" name="eur" id="eur" class="form-control" value="<%= locals.eur || 0 %>" />
+        </div> <div class="form-group">
+            <label for="chf">CHF</label>
+            <input type="number" name="chf" id="chf" class="form-control" value="<%= locals.chf || 0 %>" />
+        </div> <div class="form-group">
+            <label for="rub">RUB</label>
+            <input type="number" name="rub" id="rub" class="form-control" value="<%= locals.rub || 0 %>" />
+        </div> <div class="form-group">
+            <label for="czk">CZK</label>
+            <input type="number" name="czk" id="czk" class="form-control" value="<%= locals.czk || 0 %>" />
+        </div> <div class="form-group">
+            <label for="gbp">GBP</label>
+            <input type="number" name="gbp" id="gbp" class="form-control" value="<%= locals.gbp || 0 %>" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Register</button>
+            <a href="/login" class="btn btn-link">Cancel</a>
+        </div>
+
+    </form>
+</div>
+<%- include('partials/footer') %>

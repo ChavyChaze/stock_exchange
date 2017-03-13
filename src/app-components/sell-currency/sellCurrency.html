@@ -1,0 +1,22 @@
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Currency</th>
+                <th>Unit price</th>
+                <th>Amount</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in $ctrl.cantorData">
+                <td>{{item.code}}</td>
+                <td>{{item.sellPrice | number : 2}}</td>
+                <td>{{item.userUnits}}</td>
+                <td>{{item.value | number: 2}}</td>
+                <td><button class="btn btn-warning" ng-click="$ctrl.sellCurrency(item)" ng-disabled="item.userUnits == 0">Sell</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
