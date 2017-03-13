@@ -52,9 +52,10 @@
 
         function intervalUpdateCurrency() {
             vm.init();
-            vm.intervalId = setInterval(vm.intervalUpdateCurrency, 30000);
             $rootScope.$broadcast('BoughtCurrency');
         };
+
+        setInterval(vm.intervalUpdateCurrency, 30000);
 
         function getCantorData() {
             vm.cantorData = vm.currencyData.map(function (item) {
