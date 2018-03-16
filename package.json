@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Frekki/stock_exchange/issues"
   },
-  "homepage": "https://github.com/Frekki/stock_exchange#readme"
+  "homepage": "https://github.com/Frekki/stock_exchange#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.3"
+  }
 }

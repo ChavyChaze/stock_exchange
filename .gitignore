@@ -1,0 +1,5 @@
+# Generated files
+.package-lock.json
+
+# Dependencys
+node_modules
