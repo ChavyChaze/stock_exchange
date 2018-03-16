@@ -10,7 +10,7 @@ router.get('/current', getCurrentUser);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 
-let authenticateUser = (req, res) => {
+function authenticateUser(req, res) {
     userService.authenticate(req.body.username, req.body.password)
         .then(token => {
             if (token) {
@@ -24,7 +24,7 @@ let authenticateUser = (req, res) => {
         });
 };
 
-let registerUser = (req, res) => {
+function registerUser(req, res) {
     userService.create(req.body)
         .then(() => {
             res.sendStatus(200);
@@ -34,7 +34,7 @@ let registerUser = (req, res) => {
         });
 };
 
-let getCurrentUser = (req, res) => {
+function getCurrentUser(req, res) {
     userService.getById(req.user.sub)
         .then(user => {
             if(user){
@@ -48,7 +48,7 @@ let getCurrentUser = (req, res) => {
         });
 };
 
-let updateUser = (req, res) => {
+function updateUser(req, res) {
     const userId = req.user.sub;    
     if(req.params._id !== userId){
         return res.status(401).send('You can\'t update others account'); // denied accessing others accounts
@@ -63,7 +63,7 @@ let updateUser = (req, res) => {
         });
 };
 
-let deleteUser = (req, res) => {
+function deleteUser(req, res) {
     const userId = req.user.sub;
     if(req.params._id !== userId) {
         return res.status(401).send('You can\'t delete others account'); // denied deleting others accounts

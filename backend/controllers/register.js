@@ -4,7 +4,7 @@ const config = require('config.json');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', function(req, res) {
     res.render('register');
 });
 

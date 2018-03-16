@@ -16,9 +16,7 @@ service.create = create;
 service.update = update;
 service.delete =  _delete;
 
-module.exports = service;
-
-let authenticate = (username, password) => {
+function authenticate(username, password) {
     const deferred = Q.defer();
 
     db.users.findOne({ username }, (err, user) => {
@@ -35,7 +33,7 @@ let authenticate = (username, password) => {
     return deferred.promise;
 };
 
-let getById = (_id) => {
+function getById(_id) {
     const deferred = Q.defer();
 
     db.user.findById(_id, (err, user) => {
@@ -52,7 +50,7 @@ let getById = (_id) => {
     return deferred.promise;
 };
 
-let create = userParam => {
+function create(userParam) {
     const deferred = Q.defer();
 
     /// Validation
@@ -67,7 +65,7 @@ let create = userParam => {
         }
     });
 
-    let createUser = () => {
+    function createUser() {
         let currencyExchange = {
             fp: 1000,
             fpl: 1000,
@@ -111,7 +109,7 @@ let create = userParam => {
     return deffered.promise;
 };
 
-let update = (_id, userParam) => {
+function update(_id, userParam) {
     const deffered = Q.defer();
 
     /// Validation
@@ -137,7 +135,7 @@ let update = (_id, userParam) => {
         }
     });
 
-    let updateUser = () => {
+    function updateUser() {
         const set = {
             firstName: userParam.firstName,
             lastName: userParam.lastName,
@@ -180,7 +178,7 @@ let update = (_id, userParam) => {
     return deffered.promise;
 };
 
-let _delete = (_id) => {
+function _delete(_id) {
     const deffered = Q.defer();
 
     db.user.remove({ _id: mongo.helper.toObjectID(_id) }, err => {
@@ -192,3 +190,5 @@ let _delete = (_id) => {
 
     return deffered.promise;
 };
+
+module.exports = service;
