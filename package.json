@@ -1,0 +1,19 @@
+{
+  "name": "stock_exchange",
+  "version": "1.0.0",
+  "description": "Recruitment task for Future Processing",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frekki/stock_exchange.git"
+  },
+  "author": "Vitaliy Sobol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Frekki/stock_exchange/issues"
+  },
+  "homepage": "https://github.com/Frekki/stock_exchange#readme"
+}
