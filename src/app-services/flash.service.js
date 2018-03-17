@@ -6,7 +6,7 @@
         .factory('FlashService', Service);
 
     function Service($rootScope) {
-        var service = {};
+        let service = {};
 
         service.Success = Success;
         service.Error = Error;
@@ -21,13 +21,12 @@
             });
 
             function clearFlashMessage() {
-                var flash = $rootScope.flash;
+                let flash = $rootScope.flash;
                 if (flash) {
                     if (!flash.keepAfterLocationChange) {
                         delete $rootScope.flash;
-                    } else {
-                        // only keep for a single location change
-                        flash.keepAfterLocationChange = false;
+                    } else {                        
+                        flash.keepAfterLocationChange = false; // only keep for a single location change
                     }
                 }
             }
@@ -49,5 +48,4 @@
             };
         }
     }
-
 })();

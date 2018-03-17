@@ -1,9 +1,9 @@
 {
-  "name": "FP-test-task",
+  "name": "Stock",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pawelbujna/mean-app"
+    "url": "git+https://github.com/ChavyChaze/stock_exchange.git"
   },
   "dependencies": {
     "bcryptjs": "^2.1.0",

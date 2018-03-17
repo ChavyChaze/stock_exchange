@@ -1,18 +1,18 @@
 ﻿<div>
     <error-overlay></error-overlay>
 
-    <h1>Hi {{vm.user.firstName}}!!</h1>
+    <h1>Hello {{vm.user.firstName}}!!</h1>
     <br>
 
     <div class="panel panel-default">
         <div class="panel-body">
-            Last update was at: <strong> {{vm.currencyUpdateDate | date: 'yyyy/MM/d hh:mm:ss'}} </strong>
+            Last update at: <strong> {{vm.currencyUpdateDate | date: 'yyyy/MM/d hh:mm:ss'}} </strong>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12 col-md-6">
-            <h4>Cantor Data</h4>
+            <h4>Currency Exchange Data</h4>
             <buy-currency></buy-currency>
         </div>
         <div class="col-sm-12 col-md-6">
@@ -22,6 +22,6 @@
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-body">Your current wallet value is: <strong>{{vm.user.value | number : 2}} {{vm.user.currency}}</strong></div>
+        <div class="panel-body">Your wallet value: <strong>{{vm.user.value | number : 2}} {{vm.user.currency}}</strong></div>
     </div>
 </div>

@@ -1,10 +1,10 @@
 ﻿require('rootpath')();
-var express = require('express');
-var app = express();
-var session = require('cookie-session');
-var bodyParser = require('body-parser');
-var expressJwt = require('express-jwt');
-var config = require('config.json');
+const express = require('express');
+const app = express();
+const session = require('cookie-session');
+const bodyParser = require('body-parser');
+const expressJwt = require('express-jwt');
+const config = require('config.json');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/backend/views');
@@ -28,6 +28,6 @@ app.get('/', function (req, res) {
 });
 
 // start server
-var server = app.listen(process.env.PORT || 5000, function () {
+const server = app.listen(process.env.PORT || 5000, function () {
     console.log('Server listening at http://' + server.address().address + ':' + server.address().port);
 });

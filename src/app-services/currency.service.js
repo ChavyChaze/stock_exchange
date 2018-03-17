@@ -6,7 +6,7 @@
         .factory('CurrencyService', CurrencyService);
 
     function CurrencyService($http, $q) {
-        var service = {};
+        let service = {};
 
         service.getCurrentCurrencyData = getCurrentCurrencyData;
 
@@ -16,8 +16,7 @@
             return $http.get('/api/currency').then(handleSuccess, handleError);
         }
 
-        // private functions
-
+        // private
         function handleSuccess(res) {
             return res.data;
         }
@@ -26,5 +25,4 @@
             return $q.reject(res.data);
         }
     }
-
 })();

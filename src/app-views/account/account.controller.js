@@ -8,7 +8,7 @@
     AccountController.$inject = ['$window', 'UserService', 'FlashService']
 
     function AccountController($window, UserService, FlashService) {
-        var vm = this;
+        const vm = this;
 
         vm.user = null;
         vm.saveUser = saveUser;
@@ -17,8 +17,7 @@
         initController();
 
         function initController() {
-            // get current user
-            UserService.GetCurrent().then(function (user) {
+            UserService.GetCurrent().then(function (user) { // get current user
                 vm.user = user;
             });
         }

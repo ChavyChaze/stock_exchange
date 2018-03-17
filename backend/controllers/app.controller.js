@@ -1,8 +1,7 @@
-﻿var express = require('express');
-var router = express.Router();
+﻿const express = require('express');
+const router = express.Router();
 
-// use session auth to secure the angular app files
-router.use('/', function (req, res, next) {
+router.use('/', function (req, res, next) { // use session auth to secure the angular files
     if (req.path !== '/login' && !req.session.token) {
         return res.redirect('/login?returnUrl=' + encodeURIComponent('/app' + req.path));
     }
@@ -10,12 +9,10 @@ router.use('/', function (req, res, next) {
     next();
 });
 
-// make JWT token available to angular app
-router.get('/token', function (req, res) {
+router.get('/token', function (req, res) { // avvailable JWT token to angualr
     res.send(req.session.token);
 });
 
-// serve angular app files from the '/src' route
-router.use('/', express.static('src'));
+router.use('/', express.static('src')); // serve angular app files from '/src'
 
 module.exports = router;

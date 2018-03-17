@@ -15,7 +15,7 @@
     BuyModalController.$inject = ['UserService', 'FlashService', 'blockUI']
 
     function BuyModalController(UserService, FlashService, blockUI) {
-        var vm = this;
+        const vm = this;
 
         vm.user = null;
         vm.modalData = null;
@@ -36,19 +36,19 @@
                     blockUI.stop();
                 })
                 .catch(function (err) {
-                    console.log(err)
+                    console.log(err);
                     blockUI.start();
                 });
         }
 
         function updateCurrencyCount() {
             if (vm.modalData.unit > 1) {
-                vm.summary = (vm.modalData.count / vm.modalData.unit) * vm.modalData.purchasePrice;
+                vm.summary = (vm.modalData.count / vm.modalData.unit) * vm.modalData.price;
             } else {
-                vm.summary = vm.modalData.count * vm.modalData.purchasePrice;
+                vm.summary = vm.modalData.count * vm.modalData.price;
             }
 
-            (((vm.user.cantor[vm.modalData.code.toLowerCase()] - vm.modalData.count) < 0) || (vm.summary > vm.user.value)) ?
+            (((vm.user.currencyExchange[vm.modalData.code.toLowerCase()] - vm.modalData.count) < 0) || (vm.summary > vm.user.value)) ?
                 vm.isDisabled = true :
                 vm.isDisabled = false;
         }
@@ -56,12 +56,12 @@
         function buyCurrency() {
             vm.user.value = vm.user.value - vm.summary;
             vm.user.user[vm.modalData.code.toLowerCase()] = vm.user.user[vm.modalData.code.toLowerCase()] + vm.modalData.count;
-            vm.user.cantor[vm.modalData.code.toLowerCase()] = vm.user.cantor[vm.modalData.code.toLowerCase()] - vm.modalData.count;
+            vm.user.currencyExchange[vm.modalData.code.toLowerCase()] = vm.user.currencyExchange[vm.modalData.code.toLowerCase()] - vm.modalData.count;
 
             UserService.Update(vm.user)
                 .then(function () {
                     FlashService.Success('User updated');
-                    vm.modalInstance.close()
+                    vm.modalInstance.close();
                 })
                 .catch(function (error) {
                     FlashService.Error(error);

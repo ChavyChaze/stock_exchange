@@ -6,7 +6,7 @@
         .factory('UserService', Service);
 
     function Service($http, $q) {
-        var service = {};
+        let service = {};
 
         service.GetCurrent = GetCurrent;
         service.GetAll = GetAll;
@@ -46,8 +46,7 @@
             return $http.delete('/api/users/' + _id).then(handleSuccess, handleError);
         }
 
-        // private functions
-
+        // private
         function handleSuccess(res) {
             return res.data;
         }
@@ -56,5 +55,4 @@
             return $q.reject(res.data);
         }
     }
-
 })();

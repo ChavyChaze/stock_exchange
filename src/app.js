@@ -28,19 +28,15 @@
     }
 
     function run($http, $rootScope, $window) {
-        // add JWT token as default auth header
-        $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
+        $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken; // default JWT equals 0
 
-        // update active tab on state change
-        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) { // update active tab on state change
             $rootScope.activeTab = toState.data.activeTab;
         });
     }
 
-    // manually bootstrap angular after the JWT token is retrieved from the server
-    $(function () {
-        // get JWT token from server
-        $.get('/app/token', function (token) {
+    $(function () { // manually bootstrap angular
+        $.get('/app/token', function (token) { // get JWT token
             window.jwtToken = token;
 
             angular.bootstrap(document, ['app']);

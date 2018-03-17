@@ -10,12 +10,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in $ctrl.cantorData">
+            <tr ng-repeat="item in $ctrl.currencyExchangeData">
                 <td>{{item.code}}</td>
                 <td>{{item.unit}}</td>
-                <td>{{item.cantorUnit}}</td>
-                <td>{{item.purchasePrice | number : 2}}</td>
-                <td><button class="btn btn-success" ng-click="$ctrl.buyCurrency(item)" ng-disabled="item.cantorUnit == 0">Buy</button></td>
+                <td>{{item.currencyExchangeUnit}}</td>
+                <td>{{item.price | number : 2}}</td>
+                <td><button class="btn btn-success" ng-click="$ctrl.buyCurrency(item)" ng-disabled="item.currencyExchangeUnit == 0">Buy</button></td>
             </tr>
         </tbody>
     </table>

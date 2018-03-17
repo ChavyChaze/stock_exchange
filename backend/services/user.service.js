@@ -1,13 +1,13 @@
-﻿var config = require('config.json');
-var _ = require('lodash');
-var jwt = require('jsonwebtoken');
-var bcrypt = require('bcryptjs');
-var Q = require('q');
-var mongo = require('mongoskin');
-var db = mongo.db(process.env.MONGODB_URI || config.connectionString, { w: 1 });
+﻿const config = require('config.json');
+const _ = require('lodash');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const Q = require('q');
+const mongo = require('mongoskin');
+const db = mongo.db(process.env.MONGODB_URI || config.connectionString, { w: 1 });
 db.bind('users');
 
-var service = {};
+let service = {};
 
 service.authenticate = authenticate;
 service.getById = getById;
@@ -18,17 +18,15 @@ service.delete = _delete;
 module.exports = service;
 
 function authenticate(username, password) {
-    var deferred = Q.defer();
+    const deferred = Q.defer();
 
     db.users.findOne({ username: username }, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         if (user && bcrypt.compareSync(password, user.hash)) {
-            // authentication successful
-            deferred.resolve(jwt.sign({ sub: user._id }, config.secret));
+            deferred.resolve(jwt.sign({ sub: user._id }, config.secret)); // authentication successful
         } else {
-            // authentication failed
-            deferred.resolve();
+            deferred.resolve(); // authentication failed
         }
     });
 
@@ -36,17 +34,15 @@ function authenticate(username, password) {
 }
 
 function getById(_id) {
-    var deferred = Q.defer();
+    const deferred = Q.defer();
 
     db.users.findById(_id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         if (user) {
-            // return user (without hashed password)
-            deferred.resolve(_.omit(user, 'hash'));
+            deferred.resolve(_.omit(user, 'hash')); // return user (without hashed password)
         } else {
-            // user not found
-            deferred.resolve();
+            deferred.resolve(); // user not found
         }
     });
 
@@ -54,55 +50,50 @@ function getById(_id) {
 }
 
 function create(userParam) {
-    var deferred = Q.defer();
+    const deferred = Q.defer();
 
-    // validation
-    db.users.findOne(
+    db.users.findOne( // validation
         { username: userParam.username },
         function (err, user) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 
             if (user) {
-                // username already exists
-                deferred.reject('Username "' + userParam.username + '" is already taken');
+                deferred.reject('Username "' + userParam.username + '" is already taken'); // username already exists
             } else {
                 createUser();
             }
         });
 
     function createUser() {
-        // set some 
-        var cantor = {
-            usd: 1500,
-            eur: 1500,
-            chf: 1500,
-            rub: 1500,
-            czk: 1500,
-            gbp: 1500
-        }
-        var user = {
-            usd: userParam.usd,
-            eur: userParam.eur,
-            chf: userParam.chf,
-            rub: userParam.rub,
-            czk: userParam.czk,
-            gbp: userParam.gbp
-        }
+        let currencyExchange = {
+            fp: 500,
+            fpl: 500,
+            pgb: 500,
+            fpc: 500,
+            fpa: 500,
+            dl24: 500
+        };
+        let user = {
+            fp: userParam.fp,
+            fpl: userParam.fpl,
+            pgb: userParam.pgb,
+            fpc: userParam.fpc,
+            fpa: userParam.fpa,
+            dl24: userParam.dl24
+        };
 
         for (key in user) {
             user[key] = parseInt(user[key])
             delete userParam[key]
         }
 
-        userParam.cantor = cantor;
+        userParam.currencyExchange = currencyExchange;
         userParam.user = user;
         userParam.value = parseInt(userParam.value);
 
-        // set user object to userParam without the cleartext password
-        var user = _.omit(userParam, 'password');
+        user = _.omit(userParam, 'password'); // set user object to userParam
 
-        // add hashed password to user object
-        user.hash = bcrypt.hashSync(userParam.password, 10);
+        user.hash = bcrypt.hashSync(userParam.password, 10); // add hashed password to user object
 
         db.users.insert(
             user,
@@ -117,22 +108,19 @@ function create(userParam) {
 }
 
 function update(_id, userParam) {
-    var deferred = Q.defer();
+    const deferred = Q.defer();
 
-    // validation
-    db.users.findById(_id, function (err, user) {
+    db.users.findById(_id, function (err, user) { // validation
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         if (user.username !== userParam.username) {
-            // username has changed so check if the new username is already taken
-            db.users.findOne(
+            db.users.findOne( // check if username is available
                 { username: userParam.username },
                 function (err, user) {
                     if (err) deferred.reject(err.name + ': ' + err.message);
 
-                    if (user) {
-                        // username already exists
-                        deferred.reject('Username "' + req.body.username + '" is already taken')
+                    if (user) {                        
+                        deferred.reject('Username "' + req.body.username + '" is already taken'); // username already exists
                     } else {
                         updateUser();
                     }
@@ -142,33 +130,31 @@ function update(_id, userParam) {
         }
     });
 
-    function updateUser() {
-        // fields to update
-        var set = {
+    function updateUser() {        
+        let set = { // fields to update
             firstName: userParam.firstName,
             lastName: userParam.lastName,
             username: userParam.username,
             value: userParam.value,
-            cantor: {
-                usd: userParam.cantor.usd,
-                eur: userParam.cantor.eur,
-                chf: userParam.cantor.chf,
-                rub: userParam.cantor.rub,
-                czk: userParam.cantor.czk,
-                gbp: userParam.cantor.gbp
+            currencyExchange: {
+                fp: userParam.currencyExchange.fp,
+                fpl: userParam.currencyExchange.fpl,
+                pgb: userParam.currencyExchange.pgb,
+                fpc: userParam.currencyExchange.fpc,
+                fpa: userParam.currencyExchange.fpa,
+                dl24: userParam.currencyExchange.dl24
             },
             user: {
-                usd: userParam.user.usd,
-                eur: userParam.user.eur,
-                chf: userParam.user.chf,
-                rub: userParam.user.rub,
-                czk: userParam.user.czk,
-                gbp: userParam.user.gbp
+                fp: userParam.user.fp,
+                fpl: userParam.user.fpl,
+                pgb: userParam.user.pgb,
+                fpc: userParam.user.fpc,
+                fpa: userParam.user.fpa,
+                dl24: userParam.user.dl24
             }
         };
-
-        // update password if it was entered
-        if (userParam.password) {
+        
+        if (userParam.password) { // update password if it was entered
             set.hash = bcrypt.hashSync(userParam.password, 10);
         }
 
@@ -186,7 +172,7 @@ function update(_id, userParam) {
 }
 
 function _delete(_id) {
-    var deferred = Q.defer();
+    const deferred = Q.defer();
 
     db.users.remove(
         { _id: mongo.helper.toObjectID(_id) },

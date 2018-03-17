@@ -1,15 +1,14 @@
-﻿var express = require('express');
-var router = express.Router();
-var request = require('request');
-var config = require('config.json');
+﻿const express = require('express');
+const router = express.Router();
+const request = require('request');
+const config = require('config.json');
 
 router.get('/', function (req, res) {
     res.render('register');
 });
 
 router.post('/', function (req, res) {
-    // register using api to maintain clean separation between layers
-    var route = null;
+    let route = null; // register using api to maintain clean separation between layers
 
     process.env.ROOT_URL ?
         route = process.env.ROOT_URL :
@@ -25,7 +24,6 @@ router.post('/', function (req, res) {
         }
 
         if (response.statusCode !== 200) {
-
             return res.render('register', {
                 error: response.body,
                 firstName: req.body.firstName,
@@ -36,8 +34,7 @@ router.post('/', function (req, res) {
             });
         }
 
-        // return to login page with success message
-        req.session.success = 'Registration successful';
+        req.session.success = 'Registration successful'; // return to login page with success message
         return res.redirect('/login');
     });
 });

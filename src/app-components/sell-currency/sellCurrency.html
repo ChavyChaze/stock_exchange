@@ -10,9 +10,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in $ctrl.cantorData">
+            <tr ng-repeat="item in $ctrl.currencyExchangeData">
                 <td>{{item.code}}</td>
-                <td>{{item.sellPrice | number : 2}}</td>
+                <td>{{item.price | number : 2}}</td>
                 <td>{{item.userUnits}}</td>
                 <td>{{item.value | number: 2}}</td>
                 <td><button class="btn btn-warning" ng-click="$ctrl.sellCurrency(item)" ng-disabled="item.userUnits == 0">Sell</button></td>

@@ -8,7 +8,7 @@
     HomeController.$inject = ['$rootScope', 'UserService', 'CurrencyService']
 
     function HomeController($rootScope, UserService, CurrencyService) {
-        var vm = this;
+        const vm = this;
 
         vm.user = null;
         vm.init = init;
@@ -16,8 +16,7 @@
         vm.$onInit = vm.init;
 
         function init() {
-            // get current user
-            UserService.GetCurrent().then(function (user) {
+            UserService.GetCurrent().then(function (user) { // get current user
                 vm.user = user;
             });
 
@@ -26,12 +25,12 @@
                     vm.currencyUpdateDate = data.publicationDate;
                 })
                 .catch(function (err) {
-                    console.log(err)
+                    console.log(err);
                 });
         }
 
         $rootScope.$on('BoughtCurrency', function () {
-            vm.init()
+            vm.init();
         });
     }
 

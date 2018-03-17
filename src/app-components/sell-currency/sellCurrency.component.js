@@ -11,13 +11,13 @@
     SellCurrencyController.$inject = ['$rootScope', 'CurrencyService', 'UserService', '$uibModal', 'blockUI']
 
     function SellCurrencyController($rootScope, CurrencyService, UserService, $uibModal, blockUI) {
-        var vm = this;
+        const vm = this;
 
         vm.user = null;
         vm.currencyData = null;
-        vm.cantorData = null;
-        vm.userWalletData = null
-        vm.getCantorData = getCantorData;
+        vm.currencyExchangeData = null;
+        vm.userWalletData = null;
+        vm.getCurrencyExchangeData = getCurrencyExchangeData;
         vm.sellCurrency = sellCurrency;
         vm.init = init;
 
@@ -32,38 +32,37 @@
                 })
                 .catch(function (err) {
                     blockUI.start();
-                    console.log(err)
+                    console.log(err);
                 });
 
             CurrencyService.getCurrentCurrencyData()
                 .then(function (data) {
                     vm.currencyData = data.items;
-                    vm.getCantorData()
+                    vm.getCurrencyExchangeData();
                     blockUI.stop();
                 })
                 .catch(function (err) {
                     blockUI.start();
-                    console.log(err)
+                    console.log(err);
                 });
         };
 
-        function getCantorData() {
-            vm.cantorData = vm.currencyData.map(function (item) {
-                item['userUnits'] = vm.userWalletData[item.code.toLowerCase()]
+        function getCurrencyExchangeData() {
+            vm.currencyExchangeData = vm.currencyData.map(function (item) {
+                item['userUnits'] = vm.userWalletData[item.code.toLowerCase()];
 
                 if (item.unit > 1) {
-                    item.value = (item.userUnits / item.unit) * item.sellPrice;
+                    item.value = (item.userUnits / item.unit) * item.price;
                 } else {
-                    item.value = item.userUnits * item.sellPrice;
+                    item.value = item.userUnits * item.price;
                 }
 
                 return item;
             });
         };
 
-
         function sellCurrency(item) {
-            var pickedCurrency = item;
+            let pickedCurrency = item;
 
             $uibModal.open({
                 component: 'sellModal',
@@ -74,17 +73,15 @@
                 }
             }).result.then(function (result) {
                 vm.init();
-                $rootScope.$broadcast('BoughtCurrency')
+                $rootScope.$broadcast('BoughtCurrency');
             }, function (reason) {
-                console.log('reason was ->')
-                console.log(reason)
+                console.log('the reason is ');
+                console.log(reason);
             })
         };
 
-
         $rootScope.$on('BoughtCurrency', function () {
-            vm.init()
+            vm.init();
         });
-
     }
 })();
