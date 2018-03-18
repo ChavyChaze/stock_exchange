@@ -43,11 +43,7 @@
         }
 
         function updateCurrencyCount() {
-            if (vm.modalData.unit > 1) {
-                vm.summary = (vm.modalData.count / vm.modalData.unit) * vm.modalData.price;
-            } else {
-                vm.summary = vm.modalData.count * vm.modalData.price;
-            }
+            vm.summary = vm.modalData.count * vm.modalData.price;
 
             ((vm.user.user[vm.modalData.code.toLowerCase()] - vm.modalData.count) < 0) ?
                 vm.isDisabled = true :

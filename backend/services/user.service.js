@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const Q = require('q');
 const mongo = require('mongoskin');
-const db = mongo.db(process.env.MONGODB_URI || config.connectionString); // heroku config
+const db = mongo.db(process.env.MONGODB_URI || config.connectionString, { w: 1 }); // heroku config
 db.bind('users');
 
 let service = {};

@@ -51,12 +51,8 @@
             vm.currencyExchangeData = vm.currencyData.map(function (item) {
                 item['userUnits'] = vm.userWalletData[item.code.toLowerCase()];
 
-                if (item.unit > 1) {
-                    item.value = (item.userUnits / item.unit) * item.price;
-                } else {
-                    item.value = item.userUnits * item.price;
-                }
-
+                item.value = item.userUnits * item.price;
+                
                 return item;
             });
         };
