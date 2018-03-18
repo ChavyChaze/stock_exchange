@@ -18,11 +18,12 @@
 
         // private
         function handleSuccess(res) {
+            // console.log(res.data);
             return res.data;
         }
 
         function handleError(res) {
             return $q.reject(res.data);
-        }
+        }        
     }
 })();
