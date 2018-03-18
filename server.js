@@ -5,7 +5,7 @@ const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const expressJwt = require('express-jwt');
 const config = require('config.json');
-const port = process.env.PORT || 3000; // heroku connect config
+const port = process.env.PORT || 3000; // heroku settings
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/backend/views');
