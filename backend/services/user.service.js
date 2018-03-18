@@ -1,4 +1,4 @@
-﻿const config = require('config.json');
+﻿const config = require('./../../config.json');
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
