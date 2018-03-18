@@ -25,7 +25,7 @@ router.post('/', function (req, res) {
         json: true
     }, function (error, response, body) {
         if (error) {
-            return res.render('login', { error: 'An error occurred' });
+            return res.render('login', { error: 'Error occurred' });
         }
 
         if (!body.token) {
