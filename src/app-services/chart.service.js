@@ -1,23 +1,13 @@
-// (function () {
+// (function (angular, d3) {
 //     'use strict';
 
 //     angular
 //         .module('app')
-//         .factory('CurrencyService', CurrencyService);
+//         .factory('ChartService', ChartService);
 
-//     function CurrencyService($http, $q) {
-//         let service = {};
-
-//         service.getCurrentCurrencyData = getCurrentCurrencyData;
-
-//         return service;
-
-//         function getCurrentCurrencyData() {
-//             return $http.get('/api/currency').then(lineChart, handleSuccess, handleError);
-//         }
+//     function ChartService($http, $q) {
 
 //         // private
-//         function lineChart(res){
 //         //     // Set the dimensions of the canvas / graph
 //         //     var margin = {top: 30, right: 20, bottom: 30, left: 50},
 //         //     width = 600 - margin.left - margin.right,
@@ -80,15 +70,6 @@
 //         //         .call(yAxis);
 
 //         //     });
-//         }
-
-//         function handleSuccess(res) {
-//             console.log(res.data);
-//             return res.data;
-//         }
-
-//         function handleError(res) {
-//             return $q.reject(res.data);
-//         }
+        
 //     }
-// })();
+// })(window.angular, window.d3);

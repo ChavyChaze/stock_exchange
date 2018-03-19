@@ -7,11 +7,11 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "",
+    "test": "mocha test/test.js",
     "test-watch": "nodemon --exec 'npm test'"
   },
   "engines": {
-    "node": "8.10.0"
+    "node": "6.11.1"
   },
   "dependencies": {
     "bcryptjs": "^2.1.0",
@@ -20,6 +20,7 @@
     "ejs": "^2.3.3",
     "express": "^4.13.0",
     "express-jwt": "^3.0.1",
+    "g": "^2.0.1",
     "jsonwebtoken": "^5.0.2",
     "lodash": "^3.10.0",
     "mongodb": "^2.1.16",
@@ -28,5 +29,12 @@
     "request": "^2.58.0",
     "rootpath": "^0.1.2",
     "tiny-lr": "^1.0.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-ruby-sass": "^3.0.0"
   }
 }
