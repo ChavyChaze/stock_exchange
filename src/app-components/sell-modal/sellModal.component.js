@@ -44,7 +44,6 @@
 
         function updateCurrencyCount() {  
             vm.summary = vm.modalData.count * vm.modalData.price;
-
             
             ((vm.user.user[vm.modalData.code.toLowerCase()] - vm.modalData.count) < 0 || vm.modalData.count < 1) ?
                 vm.isDisabled = true :
@@ -52,18 +51,22 @@
         }
 
         function sellCurrency() {
-            vm.user.value = vm.user.value + vm.summary;
-            vm.user.user[vm.modalData.code.toLowerCase()] = vm.user.user[vm.modalData.code.toLowerCase()] - vm.modalData.count;
-            vm.user.currencyExchange[vm.modalData.code.toLowerCase()] = vm.user.currencyExchange[vm.modalData.code.toLowerCase()] + vm.modalData.count;
-
-            UserService.Update(vm.user)
-                .then(function () {
-                    FlashService.Success('Data updated');
-                    vm.modalInstance.close();
-                })
-                .catch(function (error) {
-                    FlashService.Error(error);
-                });
+            if(vm.modalData.count > 0) {
+                vm.user.value = vm.user.value + vm.summary;
+                vm.user.user[vm.modalData.code.toLowerCase()] = vm.user.user[vm.modalData.code.toLowerCase()] - vm.modalData.count;
+                vm.user.currencyExchange[vm.modalData.code.toLowerCase()] = vm.user.currencyExchange[vm.modalData.code.toLowerCase()] + vm.modalData.count;
+                
+                UserService.Update(vm.user)
+                    .then(function () {
+                        FlashService.Success('Data updated');
+                        vm.modalInstance.close();
+                    })
+                    .catch(function (error) {
+                        FlashService.Error(error);
+                    });
+            } else {
+                FlashService.Error('Enter a valid data');
+            }
         }
 
         function close() {

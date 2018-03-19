@@ -50,18 +50,22 @@
         }
 
         function buyCurrency() {
-            vm.user.value = vm.user.value - vm.summary;
-            vm.user.user[vm.modalData.code.toLowerCase()] = vm.user.user[vm.modalData.code.toLowerCase()] + vm.modalData.count;
-            vm.user.currencyExchange[vm.modalData.code.toLowerCase()] = vm.user.currencyExchange[vm.modalData.code.toLowerCase()] - vm.modalData.count;
+            if(vm.modalData.count > 0) {
+                vm.user.value = vm.user.value - vm.summary;
+                vm.user.user[vm.modalData.code.toLowerCase()] = vm.user.user[vm.modalData.code.toLowerCase()] + vm.modalData.count;
+                vm.user.currencyExchange[vm.modalData.code.toLowerCase()] = vm.user.currencyExchange[vm.modalData.code.toLowerCase()] - vm.modalData.count;
 
-            UserService.Update(vm.user)
-                .then(function () {
-                    FlashService.Success('User updated');
-                    vm.modalInstance.close();
-                })
-                .catch(function (error) {
-                    FlashService.Error(error);
-                });
+                UserService.Update(vm.user)
+                    .then(function () {
+                        FlashService.Success('User updated');
+                        vm.modalInstance.close();
+                    })
+                    .catch(function (error) {
+                        FlashService.Error(error);
+                    });
+            } else {
+                FlashService.Error('Enter a valid data');
+            }
         }
 
         function close() {
