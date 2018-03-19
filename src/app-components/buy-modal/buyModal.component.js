@@ -29,7 +29,7 @@
 
         function init() {
             vm.modalData = vm.resolve.modalData;
-
+            
             UserService.GetCurrent()
                 .then(function (user) {
                     vm.user = user;
@@ -42,9 +42,9 @@
         }
 
         function updateCurrencyCount() {
-            vm.summary = vm.modalData.count * vm.modalData.price;            
-
-            (((vm.user.currencyExchange[vm.modalData.code.toLowerCase()] - vm.modalData.count) < 0) || (vm.summary > vm.user.value)) ?
+            vm.summary = vm.modalData.count * vm.modalData.price;
+            
+            (((vm.user.currencyExchange[vm.modalData.code.toLowerCase()] - vm.modalData.count) < 0) || (vm.summary > vm.user.value) || (vm.modalData.count < 1)) ?
                 vm.isDisabled = true :
                 vm.isDisabled = false;
         }

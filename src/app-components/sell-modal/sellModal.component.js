@@ -42,12 +42,13 @@
                 });
         }
 
-        function updateCurrencyCount() {
+        function updateCurrencyCount() {  
             vm.summary = vm.modalData.count * vm.modalData.price;
 
-            ((vm.user.user[vm.modalData.code.toLowerCase()] - vm.modalData.count) < 0) ?
+            
+            ((vm.user.user[vm.modalData.code.toLowerCase()] - vm.modalData.count) < 0 || vm.modalData.count < 1) ?
                 vm.isDisabled = true :
-                vm.isDisabled = false;
+                vm.isDisabled = false;  
         }
 
         function sellCurrency() {
