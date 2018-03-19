@@ -5,11 +5,15 @@
     "type": "git",
     "url": "git+https://github.com/ChavyChaze/stock_exchange.git"
   },
+  "description": "task for future processing",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "mocha test/test.js",
     "test-watch": "nodemon --exec 'npm test'"
   },
+  "author": "Vitaliy Sobol",
+  "license": "ISC",
   "engines": {
     "node": "6.11.1"
   },
