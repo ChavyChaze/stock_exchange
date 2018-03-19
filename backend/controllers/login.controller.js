@@ -15,9 +15,11 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {    
     let route = null; // authenticate using api to maintain clean separation between layers
 
-    process.env.ROOT_URL ?
-        route = process.env.ROOT_URL :
+    if(process.env.ROOT_URL) {
+        route = process.env.ROOT_URL;
+    } else {
         route = config.apiUrl;
+    }
 
     request.post({
         url: route + '/users/authenticate',
